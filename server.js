@@ -1,12 +1,13 @@
 require('dotenv').config();
-const cors = require('cors')
+// const cors = require('cors')
 const express = require("express")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const helmet = require('helmet')
-const compression = require('compression')
+// const helmet = require('helmet')
+// const compression = require('compression')
 const jwt_decode = require('jwt-decode')
-const enforce = require('express-sslify')
+// const enforce = require('express-sslify')
+const path = require('path')
 
 // const flashcardRoutes = require('./src/routes/flashcardRoutes.js')
 // const userRoutes = require('./src/routes/userRoutes.js')
