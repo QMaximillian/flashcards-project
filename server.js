@@ -14,33 +14,16 @@ const authRoutes = require('./src/routes/authRoutes.js')
 const publicRoutes = require('./src/routes/publicRoutes.js')
 const cardSetRoutes = require('./src/routes/cardSetRoutes.js');
 
-const isProduction = process.env.NODE_ENV === 'development' ? process.env.DEVELOPMENT_ALLOWED_ORIGIN : process.env.PRODUCTION_ALLOWED_ORIGIN
+// const isProduction = process.env.NODE_ENV === 'development' ? process.env.DEVELOPMENT_ALLOWED_ORIGIN : process.env.PRODUCTION_ALLOWED_ORIGIN
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.use(enforce.HTTPS({ trustProtoHeader: true, trustXForwardedHostHeader: true }))
+// app.use(enforce.HTTPS({ trustProtoHeader: true, trustXForwardedHostHeader: true }))
 
-app.options('*', cors({credentials: true, origin: isProduction, optionsSuccessStatus: 200})) 
+// app.options('*', cors({credentials: true, origin: isProduction, optionsSuccessStatus: 200})) 
 
-app.use(cors({ credentials: true, origin: isProduction, optionsSuccessStatus: 200 }));
 // app.use(cors({ credentials: true, origin: isProduction, optionsSuccessStatus: 200 }));
 
-// app.use(async (req, res, next) => {
-  
-  //   try {
-    //     res.setHeader("Access-Control-Allow-Origin", isProduction);
-    // 		res.setHeader("Access-Control-Allow-Credentials", "true");
-    // 		res.setHeader("Access-Control-Max-Age", 86400);
-    // 		res.setHeader("Access-Control-Allow-Headers", "content-type");
-    // 		res.setHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
-    //   } catch(error) {
-      //     console.log(error)
-      //     return res.send({ message: "Something went wrong" })
-      //   }
-      
-      //   next()
-      // })
-// app.enable('trust proxy')
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
