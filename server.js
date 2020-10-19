@@ -18,7 +18,7 @@ const cardSetRoutes = require('./src/routes/cardSetRoutes.js');
 // const isProduction = process.env.NODE_ENV === 'development' ? process.env.DEVELOPMENT_ALLOWED_ORIGIN : process.env.PRODUCTION_ALLOWED_ORIGIN
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // app.use(enforce.HTTPS({ trustProtoHeader: true, trustXForwardedHostHeader: true }))
 
@@ -60,7 +60,6 @@ function attachUser(req, res, next) {
 app.use('/api', attachUser, cardSetRoutes)
 app.use('/api', attachUser, userRoutes)
 app.use('/api', attachUser, flashcardRoutes)
-
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
