@@ -60,7 +60,10 @@ function createToken(user) {
     algorithms: ['HS256']
   })
 
+function checkNodeEnvironment(environment){
+  return process.env.NODE_ENV === environment
+}
 
-module.exports = {createUser, hashPassword, createToken, verifyPassword, checkJwt}
+module.exports = {checkNodeEnvironment, createUser, hashPassword, createToken, verifyPassword, checkJwt}
 
   
