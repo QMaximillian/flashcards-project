@@ -11,8 +11,7 @@ const router = express.Router();
 router.post('/login', async (req, res, next) => {
   try {
     const { email, password } = req.body
-    console.log('email: ', email, 'password:', password)
-    
+        
     const user = await knex('users').where({ email }).first()
     if (!user) {
       return res.status(403).json({
