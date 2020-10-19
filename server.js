@@ -17,7 +17,7 @@ const cardSetRoutes = require('./src/routes/cardSetRoutes.js');
 
 const app = express();
 
-app.use(helmet( /*{ contentSecurityPolicy: false } */))
+app.use(helmet({ contentSecurityPolicy: false }))
 app.use(compression())
 app.use(express.static(path.join(__dirname, '/client/build')));
 
