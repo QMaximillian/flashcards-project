@@ -1,9 +1,8 @@
 const express = require( 'express')
 const knex = require( "../../knex/knex.js")
 const v4 = require( "uuid").v4
-const { log } = require( '../../server.js')
 const { checkJwt } = require( '../utils.js')
-
+const uuidv4 = require("uuid")
 
 const router = express.Router()
 
@@ -26,7 +25,7 @@ router.post("/card-sets", checkJwt,  async (req, res) => {
 
     res.send({ cardSetId });
   } catch (error) {
-    log(error);
+    console.log(error);
   }
 });
 
@@ -57,7 +56,7 @@ router.post("/recent-card-sets", checkJwt, async (req, res) => {
 
         return res.send({recentCardSets});
       } catch (error) {
-        log(error)
+        console.log(error)
   }
 })
 
@@ -70,7 +69,7 @@ router.patch("/update-flashcard-count", checkJwt, async (req, res) => {
 
     res.end()
   } catch (error) {
-    log(error)
+    console.log(error)
   }
 })
 
@@ -100,7 +99,7 @@ router.post("/users-card-set/new", checkJwt, async (req, res) => {
       
       res.end()
   } catch (error) {
-    log(error);
+    console.log(error);
   }
 });
 
@@ -119,7 +118,7 @@ router.get("/studied/:username", async (req, res) => {
 
       res.send({cardSets});
     } catch(error) {
-      log(error)
+      console.log(error)
     }
 });
 
@@ -154,7 +153,7 @@ router.get('/users-card-sets/:username', async (req, res) => {
       // .andWhere("users_card_sets.user_id", req.user[0].id);
       res.send({userCardSets});
   } catch(error) {
-    log(error)
+    console.log(error)
   }
 
   
@@ -173,7 +172,7 @@ router.post("/users-card-set-last-studied", checkJwt, async (req, res) => {
 
       res.end()
   } catch (error) {
-    log(error);
+    console.log(error);
   }
 });
 
@@ -191,7 +190,7 @@ router.post("/users-card-set-last-seen", checkJwt, async (req, res) => {
 
       res.end()
   } catch (error) {
-    log(error);
+    console.log(error);
   }
 });
 
@@ -204,7 +203,7 @@ router.delete('/card-sets/:id', checkJwt, async (req, res) => {
 
       res.send({message: `Success: ${req.params.id} deleted`})
   } catch(error) {
-    log(error)
+    console.log(error)
   }
 })
 

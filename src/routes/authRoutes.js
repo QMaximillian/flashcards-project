@@ -3,7 +3,6 @@ const jwt_decode = require('jwt-decode')
 
 const knex = require("../../knex/knex.js")
 const { createUser, verifyPassword, createToken, hashPassword } = require('../utils.js')
-const { log } = require('../../server.js')
 
 const router = express.Router();
 
@@ -12,6 +11,7 @@ const router = express.Router();
 router.post('/login', async (req, res, next) => {
   try {
     const { email, password } = req.body
+    console.log('email: ', email, 'password:', password)
     
     const user = await knex('users').where({ email }).first()
     if (!user) {
@@ -32,8 +32,6 @@ router.post('/login', async (req, res, next) => {
 
       res.cookie('token', token, {
         httpOnly: true,
-        domain: 'flashcards-qmax.cards',
-        secure: process.env.NODE_ENV === 'production'
       })
       res.json({
         message: "Authentication successful",

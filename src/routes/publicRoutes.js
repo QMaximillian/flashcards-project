@@ -33,10 +33,9 @@ router.get("/card-sets/:id", async (req, res) => {
       }
   });
 
-  router.get("/search/:search_phrase", async (req, res) => {
+  router.post("/search/", async (req, res) => {
     try {
-      // const { search } = req.body.data
-      const { search_phrase } = req.params
+      const { search } = req.body.data
   
       const cardSets = await knex.raw(
         `
@@ -54,7 +53,7 @@ router.get("/card-sets/:id", async (req, res) => {
             FROM card_sets 
             INNER JOIN users ON users.id::text = card_sets.user_id::text
             WHERE card_sets.private IS NOT TRUE
-            AND name ILIKE '%${search_phrase}%'
+            AND name ILIKE '%${search}%'
           `
       );
         
