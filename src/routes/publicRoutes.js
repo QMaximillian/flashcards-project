@@ -6,7 +6,6 @@ const router = express.Router()
 router.get("/card-sets/:id", async (req, res) => {
 
     try {
-  
         const cardSet = await knex.raw(`
         SELECT card_sets.name, users.username AS creator_username, users.id AS creator_id, card_sets.id AS card_set_id, 
                   (
@@ -15,7 +14,7 @@ router.get("/card-sets/:id", async (req, res) => {
                       SELECT id, term, definition
                       FROM flashcards
                       WHERE flashcards.card_set_id::text = card_sets.id::text
-                      ORDER BY id asc
+                      ORDER BY created_at ASC
                   ) f
               ) as flashcards
             FROM card_sets
