@@ -7,7 +7,7 @@ router.get("/card-sets/:id", async (req, res) => {
 
     try {
         const cardSet = await knex.raw(`
-        SELECT card_sets.name, users.username AS creator_username, users.id AS creator_id, card_sets.id AS card_set_id, 
+        SELECT card_sets.name, users.username AS creator_username, users.id AS creator_id, card_sets.id AS card_set_id, card_sets.private, 
                   (
                     SELECT array_to_json(array_agg(row_to_json(f)))
                     FROM (
@@ -25,7 +25,6 @@ router.get("/card-sets/:id", async (req, res) => {
                `);
               //  AND private IS NOT TRUE
   
-           
         res.send({cardSet: cardSet.rows[0]});
       } catch(error) {
         console.log('Error: ', error)

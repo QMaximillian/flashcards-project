@@ -73,6 +73,22 @@ router.patch("/update-flashcard-count", checkJwt, async (req, res) => {
   }
 })
 
+router.patch("/card-set", checkJwt, async (req, res) => {
+  try {
+    const { id, isPrivate } = req.body
+
+    await knex('card_sets')
+      .where({ id })
+      .update({
+        private: isPrivate
+      })
+
+    res.end()
+  } catch(error){
+    console.log(error)
+  }
+})
+
 router.post("/users-card-set/new", checkJwt, async (req, res) => {
 
   try {
