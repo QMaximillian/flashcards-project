@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node server.js",
     "start": "node server.js",
+    "test:start": "NODE_ENV=test node server.js",
     "heroku-postbuild": "knex migrate:latest && cd client && npm install && npm run build"
   },
-  "author": "",
+  "author": "Quinn Lashinsky",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.0",

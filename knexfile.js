@@ -17,6 +17,22 @@ module.exports = {
       directory: __dirname + "/knex/seeds"
     }
   },
+  test: {
+    client: "pg",
+    version: "12",
+    connection: {
+      host: "127.0.0.1",
+      user: "quinnlashinsky",
+      password: "",
+      database: "quizletdevtest"
+    },
+    migrations: {
+      directory: __dirname + "/knex/migrations"
+    },
+    seeds: {
+      directory: __dirname + "/knex/seeds"
+    }
+  },
 
   // staging: {
   //   client: "pg",

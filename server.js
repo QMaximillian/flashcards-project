@@ -60,9 +60,12 @@ app.get('*', (req,res) => {
 })
 
 
-
 const port = process.env.PORT || 8000
 
 app.listen({ port }, () => {
-  checkNodeEnvironment('development') && console.log(`Server on http://localhost:${port}`);
+  if (checkNodeEnvironment('development')) {
+    console.log(`Server on http://localhost:${port}`);
+  } else if (checkNodeEnvironment('test')) {
+    console.log(`TEST ENVIRONMENT: Server on http://localhost:${port}`)
+  }
 });

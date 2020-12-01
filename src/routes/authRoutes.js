@@ -53,7 +53,6 @@ router.post('/login', async (req, res, next) => {
 
 /* Local Register */
 router.post("/register", async (req, res) => {
-  
   try {
     const { username, email, first_name, last_name } = req.body;
     const hashedPassword = await hashPassword(req.body.password)
@@ -120,12 +119,15 @@ router.post("/register", async (req, res) => {
     });
     } else {
       return res.status(400).json({
-        message: 'There was a problem creating your account'
+        message: 'There was a problem creating your account',
+        error
       });
     }
   } catch(error) {
+    console.log(error)
     return res.status(400).json({
-      message: 'There was a problem creating your account'
+      message: 'There was a problem creating your account',
+      error
     });
   }
 });
