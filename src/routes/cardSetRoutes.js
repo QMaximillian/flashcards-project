@@ -149,11 +149,11 @@ router.get("/users-card-sets/:username", async (req, res) => {
         "users_card_sets.creator_id",
         "users_card_sets.card_set_id",
         "users_card_sets.last_seen_at",
+        "users.username AS creator_name",
         "card_sets.name",
         "card_sets.flashcards_count",
         "card_sets.created_at",
-        "card_sets.updated_at",
-        knex.raw("users.username AS creator_name")
+        "card_sets.updated_at"
       )
       .from("users_card_sets")
       .innerJoin("card_sets", "users_card_sets.card_set_id", "card_sets.id")

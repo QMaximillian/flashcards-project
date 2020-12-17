@@ -6,7 +6,8 @@ function addTimeStamps(knex, name) {
     })
     .then(() => {
       // We need to ensure the function exists, then add the table trigger
-      return knex.raw(`
+      return knex.raw(
+        `
           CREATE OR REPLACE FUNCTION update_modified_column()
           RETURNS TRIGGER AS $$
           BEGIN
@@ -15,11 +16,13 @@ function addTimeStamps(knex, name) {
           END;
           $$ language 'plpgsql';
   
-          CREATE TRIGGER update_${name}_updated_at
-          BEFORE UPDATE ON ${name}
+          CREATE TRIGGER update_?_updated_at
+          BEFORE UPDATE ON ?
           FOR EACH ROW
           EXECUTE PROCEDURE update_modified_column();
-        `);
+        `,
+        [name, name]
+      );
     });
 }
 

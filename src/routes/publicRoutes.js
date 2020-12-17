@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get("/card-sets/:id", async (req, res) => {
   try {
-    const cardSet = await knex.raw(`
+    const cardSet = await knex.raw(
+      `
         SELECT card_sets.name, users.username AS creator_username, users.id AS creator_id, card_sets.id AS card_set_id, card_sets.private, 
                   (
                     SELECT array_to_json(array_agg(row_to_json(f)))
@@ -18,8 +19,10 @@ router.get("/card-sets/:id", async (req, res) => {
               ) as flashcards
             FROM card_sets
             INNER JOIN users ON users.id::text = card_sets.user_id::text
-            WHERE card_sets.id = '${req.params.id}'
-            `);
+            WHERE card_sets.id = ?
+            `,
+      [req.params.id]
+    );
     /* Add check to make sure a user can't access a private card set */
 
     res.send({ cardSet: cardSet.rows[0] });
@@ -34,22 +37,23 @@ router.post("/search", async (req, res) => {
 
     const cardSets = await knex.raw(
       `
-                SELECT card_sets.user_id, card_sets.name, card_sets.flashcards_count, users.username AS creator_name, card_sets.id AS card_set_id, 
-                  (
-                    SELECT array_to_json(array_agg(row_to_json(f)))
-                    FROM (
-                      SELECT id, term, definition
-                      FROM flashcards
-                      WHERE flashcards.card_set_id::text = card_sets.id::text
-                      ORDER BY id asc
-                      LIMIT 4
-                  ) f
-              ) as flashcards
-            FROM card_sets 
-            INNER JOIN users ON users.id::text = card_sets.user_id::text
-            WHERE card_sets.private IS NOT TRUE
-            AND name ILIKE '%${search}%'
-          `
+        SELECT card_sets.user_id, card_sets.name, card_sets.flashcards_count, users.username AS creator_name, card_sets.id AS card_set_id, 
+          (
+            SELECT array_to_json(array_agg(row_to_json(f)))
+            FROM (
+              SELECT id, term, definition
+              FROM flashcards
+              WHERE flashcards.card_set_id::text = card_sets.id::text
+              ORDER BY id asc
+              LIMIT 4
+          ) f
+        ) as flashcards
+        FROM card_sets 
+        INNER JOIN users ON users.id::text = card_sets.user_id::text
+        WHERE card_sets.private IS NOT TRUE
+        AND name ILIKE ?
+      `,
+      [`%${search}%`]
     );
 
     res.send(cardSets.rows);
