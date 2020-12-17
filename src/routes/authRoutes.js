@@ -27,7 +27,7 @@ router.post("/login", async (req, res, next) => {
 
     if (passwordValid) {
       const { password, updated_at, created_at, ...rest } = user;
-      const userInfo = Object.assign({}, { ...rest });
+      const userInfo = { ...rest };
 
       const token = createToken(user);
       const decodedToken = jwt_decode(token);
@@ -47,7 +47,6 @@ router.post("/login", async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Something went wrong." });
   }
 });
