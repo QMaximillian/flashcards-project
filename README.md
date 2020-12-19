@@ -61,26 +61,26 @@ To setup project locally follow these steps:
 
 1. [Install Node](https://nodejs.org/en/)
 
-  - Once installed, if you're node version does not work with the project, change node version by running this command:
+  * Once installed, if you're node version does not work with the project, change node version by running this command:
     ```sh
     nvm install 14.13.0
     ```
 
 2. [Install PostgreSQL](https://postgresapp.com/)
 
-  - Follow instructions on [Postgres.app](https://postgresapp.com/) for simple PostreSQL install
+  * Follow instructions on [Postgres.app](https://postgresapp.com/) for simple PostreSQL install
 
 3. Create a ```development``` database
 
-  - In terminal, enter: 
+  * In terminal, enter: 
       
       ```sh 
       psql
       ```
       
-  - When you enter the psql terminal enter:
+  * When you enter the psql terminal enter:
   
-      - Create User
+      * Create User
           Create User w/ Password:
           ```sql 
           CREATE USER [username] WITH PASSWORD [password] CREATEDB;
@@ -93,19 +93,19 @@ To setup project locally follow these steps:
           ```
           *You do not need a password, either way will work. Make sure to include semi-colon or query will not execute*
           
-       - Create Database
+       * Create Database
           ```sql 
           CREATE DATABASE [database_name];
           ```
           
-  - You can check to see if the database was created by entering 
+  * You can check to see if the database was created by entering 
       ```sh 
       \l
       ```
       
-  - You should see your database within the table of databases
+  * You should see your database within the table of databases
  
-  - Exit ```psql``` using ```exit``` command
+  * Exit ```psql``` using ```exit``` command
 
 ### Server Setup
 
