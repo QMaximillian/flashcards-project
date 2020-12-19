@@ -135,7 +135,7 @@ To setup project locally follow these steps:
 
 2. Run ```npm start``` to start client
 
-*Project will run on and proxy requests to node api through localhost:3000*
+*Project will run on and proxy requests to Node API through localhost:3000*
 
 
 <!--- ### Setup List
