@@ -16,12 +16,11 @@ function addTimeStamps(knex, name) {
           END;
           $$ language 'plpgsql';
   
-          CREATE TRIGGER update_?_updated_at
-          BEFORE UPDATE ON ?
+          CREATE TRIGGER update_${name}_updated_at
+          BEFORE UPDATE ON ${name}
           FOR EACH ROW
           EXECUTE PROCEDURE update_modified_column();
-        `,
-        [name, name]
+        `
       );
     });
 }

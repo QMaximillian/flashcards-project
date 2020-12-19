@@ -1,13 +1,13 @@
-// Update with your config settings.
+require("dotenv").config();
 
 module.exports = {
   development: {
     client: "pg",
     version: "12",
     connection: {
-      host: process.env.DATABASE_HOST || "127.0.0.1",
+      host: process.env.DEVELOPMENT_DATABASE_HOST || "127.0.0.1",
       user: process.env.DEVELOPMENT_DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
+      password: process.env.DEVELOPMENT_DATABASE_PASSWORD,
       database: process.env.DEVELOPMENT_DATABASE_NAME,
     },
     migrations: {
