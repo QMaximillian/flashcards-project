@@ -32,7 +32,7 @@ Use Flashcards to:
 - Search all public flashcard sets
 - Study flashcard sets to prepare for a quiz, test, or exam
 
-### Built With
+## Built With
 
 - [React](https://reactjs.org/)
 - [Node](https://nodejs.org/en/)
