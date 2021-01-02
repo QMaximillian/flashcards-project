@@ -203,11 +203,30 @@ router.post("/users-card-set-last-seen", checkJwt, async (req, res) => {
 
 router.delete("/card-sets/:id", checkJwt, async (req, res) => {
   try {
+    // Add a check to see if the user_id matches (knex call against req.user.sub <- user's id)
     await knex("card_sets").where("id", req.params.id).del();
 
     res.send({ message: `Success: ${req.params.id} deleted` });
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.delete("/users-card-sets/:card_set_id", checkJwt, async (req, res) => {
+  // Use card set id to get correct user card set
+  // Compare req.user.sub against users_card_sets.user_id user_id's before deleting
+  try {
+    const { sub: user_id } = req.user;
+    await knex("users_card_sets")
+      .where("card_set_id", req.params.card_set_id)
+      .andWhere("user_id", user_id)
+      .del();
+
+    res
+      .status(200)
+      .send({ message: `Success: ${req.params.card_set_id} deleted` });
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
