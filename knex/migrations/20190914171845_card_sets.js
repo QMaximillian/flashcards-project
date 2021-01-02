@@ -13,7 +13,8 @@ exports.up = function (knex) {
               .uuid("user_id")
               .notNullable()
               .references("id")
-              .inTable("users");
+              .inTable("users")
+              .onDelete("RESTRICT");
             table.boolean("private").notNullable();
             table.integer("flashcards_count").notNullable();
             table.timestamp("created_at").defaultTo(knex.fn.now());

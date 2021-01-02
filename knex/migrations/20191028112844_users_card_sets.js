@@ -12,7 +12,8 @@ exports.up = function (knex) {
               .uuid("user_id")
               .notNullable()
               .references("id")
-              .inTable("users");
+              .inTable("users")
+              .onDelete("RESTRICT");
             table
               .uuid("card_set_id")
               .notNullable()
@@ -23,7 +24,8 @@ exports.up = function (knex) {
               .uuid("creator_id")
               .notNullable()
               .references("id")
-              .inTable("users");
+              .inTable("users")
+              .onDelete("RESTRICT");
             table.string("last_seen_at");
             table.string("last_studied_at");
             table.timestamp("created_at").defaultTo(knex.fn.now());

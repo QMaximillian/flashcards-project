@@ -14,10 +14,10 @@ exports.up = function (knex) {
               .uuid("card_set_id")
               .notNullable()
               .references("id")
-              .inTable("card_sets");
+              .inTable("card_sets")
+              .onDelete("RESTRICT");
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
-            // table.uuid("user_id").notNullable().references("id").inTable("users");
           })
           .then(() => addTimestamps(knex, "flashcards"))
           .catch(console.log);
