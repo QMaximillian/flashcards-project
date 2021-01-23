@@ -30,7 +30,6 @@ exports.up = function (knex) {
             table.string("last_studied_at");
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
-            // table.uuid("user_id").notNullable().references("id").inTable("users");
           })
           .then(() => addTimestamps(knex, "users_card_sets"))
           .catch(console.log);

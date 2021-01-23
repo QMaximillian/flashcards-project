@@ -15,7 +15,7 @@ exports.up = function (knex) {
               .notNullable()
               .references("id")
               .inTable("card_sets")
-              .onDelete("RESTRICT");
+              .onDelete("CASCADE");
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
           })
