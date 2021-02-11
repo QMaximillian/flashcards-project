@@ -122,9 +122,13 @@ To setup project locally follow these steps:
 5. Run database migrations and seed database
     - ```cd``` into the project ```server``` directory
     - Run Database Migrations
-    ```sh knex migrate:latest```
+    ```sh 
+    knex migrate:latest
+    ```
     - Run Database Seeds
-    ```sh knex seed:run```
+    ```sh 
+    knex seed:run
+    ```
     
 6. Start server
     ```npm run dev```
