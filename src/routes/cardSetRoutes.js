@@ -203,6 +203,7 @@ router.post("/users-card-set-last-seen", checkJwt, async (req, res) => {
 
 router.delete("/card-sets/:id", checkJwt, async (req, res) => {
   try {
+    // Add a check to see if the user_id matches (knex call against req.user.sub <- user's id)
     await knex("card_sets").where("id", req.params.id).del();
 
     res.send({ message: `Success: ${req.params.id} deleted` });

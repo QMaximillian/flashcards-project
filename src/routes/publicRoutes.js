@@ -7,7 +7,7 @@ router.get("/card-sets/:id", async (req, res) => {
   try {
     const cardSet = await knex.raw(
       `
-        SELECT card_sets.name, users.username AS creator_username, users.profile_pic AS creator_profile_pic, users.id AS creator_id, card_sets.id AS card_set_id, card_sets.private, 
+        SELECT card_sets.name, users.username AS creator_username, users.profile_pic_url AS creator_profile_pic, users.id AS creator_id, card_sets.id AS card_set_id, card_sets.private, 
                   (
                     SELECT array_to_json(array_agg(row_to_json(f)))
                     FROM (
