@@ -15,8 +15,10 @@ const router = express.Router();
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log({ email, password });
 
     const user = await knex("users").where({ email }).first();
+    console.log({ user });
     if (!user) {
       return res.status(403).json({
         message: "Wrong email or password",
@@ -24,6 +26,7 @@ router.post("/login", async (req, res, next) => {
     }
 
     const passwordValid = await verifyPassword(password, user.password);
+    console.log({ passwordValid });
 
     if (passwordValid) {
       const { password, updated_at, created_at, ...rest } = user;
@@ -48,7 +51,6 @@ router.post("/login", async (req, res, next) => {
     }
   } catch (error) {
     console.log({ error });
-    // console.log({ error });
     return res.status(400).json({ message: "Something went wrong." });
   }
 });
